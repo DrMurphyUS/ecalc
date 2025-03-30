@@ -1,44 +1,38 @@
-def sumar(a, b):
-    return a + b
+import tkinter as tk from tkinter import messagebox
 
-def restar(a, b):
-    return a - b
+Funciones de operaciones
 
-def multiplicar(a, b):
-    return a * b
+def sumar(a, b): return a + b
 
-def dividir(a, b):
-    if b == 0:
-        return "No se puede dividir entre cero"
-    return a / b
+def restar(a, b): return a - b
 
-def calculadora():
-    print("Bienvenido a la calculadora en Python")
-    print("Opciones: ")
-    print("1. Sumar")
-    print("2. Restar")
-    print("3. Multiplicar")
-    print("4. Dividir")
+def multiplicar(a, b): return a * b
 
-    opcion = input("Elige una opción (1/2/3/4): ")
+def dividir(a, b): if b == 0: return "No se puede dividir entre cero" return a / b
 
-    try:
-        num1 = float(input("Ingresa el primer número: "))
-        num2 = float(input("Ingresa el segundo número: "))
-    except ValueError:
-        print("Por favor ingresa números válidos.")
-        return
+Función para realizar la operación
 
-    if opcion == "1":
-        print("Resultado:", sumar(num1, num2))
-    elif opcion == "2":
-        print("Resultado:", restar(num1, num2))
-    elif opcion == "3":
-        print("Resultado:", multiplicar(num1, num2))
-    elif opcion == "4":
-        print("Resultado:", dividir(num1, num2))
-    else:
-        print("Opción no válida.")
+def calcular(operacion): try: num1 = float(entry1.get()) num2 = float(entry2.get()) if operacion == 'sumar': resultado = sumar(num1, num2) elif operacion == 'restar': resultado = restar(num1, num2) elif operacion == 'multiplicar': resultado = multiplicar(num1, num2) elif operacion == 'dividir': resultado = dividir(num1, num2) resultado_label.config(text=f"Resultado: {resultado}") except ValueError: messagebox.showerror("Error", "Por favor ingresa números válidos.")
 
-# Ejecutar la calculadora
-calculadora()
+Configuración de la ventana principal
+
+root = tk.Tk() root.title("Calculadora GUI") root.geometry("300x300")
+
+Etiquetas y campos de entrada
+
+tk.Label(root, text="Número 1:").pack() entry1 = tk.Entry(root) entry1.pack()
+
+tk.Label(root, text="Número 2:").pack() entry2 = tk.Entry(root) entry2.pack()
+
+Botones para cada operación
+
+tk.Button(root, text="Sumar", command=lambda: calcular('sumar')).pack() tk.Button(root, text="Restar", command=lambda: calcular('restar')).pack() tk.Button(root, text="Multiplicar", command=lambda: calcular('multiplicar')).pack() tk.Button(root, text="Dividir", command=lambda: calcular('dividir')).pack()
+
+Etiqueta para mostrar el resultado
+
+resultado_label = tk.Label(root, text="Resultado:") resultado_label.pack()
+
+Ejecutar la aplicación
+
+root.mainloop()
+
